@@ -4,7 +4,7 @@ import { useChatStore } from '../socket/useSocket';
 import Sidebar from './chat/Sidebar';
 import ChatArea from './chat/ChatArea';
 import Profile from './chat/profile';
-import AddUsersModal from './chat/addusermodel';
+import AddUsersModal from './chat/addUserModel-temp';
 import { Loader2 } from 'lucide-react';
 
 const ChatDashboard = () => {
