@@ -10,6 +10,7 @@ const Sidebar = ({ isMobileOpen, setIsMobileOpen, showAddUsers, setShowAddUsers 
   const [deletedChats, setDeletedChats] = useState(new Set());
   const contextMenuRef = useRef(null);
   
+  
   const { 
     users, 
     selectedUser, 
