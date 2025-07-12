@@ -11,6 +11,14 @@ require('dotenv').config();
 
 // Port config
 const PORT = process.env.PORT || 5000;
+const originalAppUse = app.use.bind(app);
+
+app.use = function (path, ...handlers) {
+  if (typeof path === 'string') {
+    console.log('🛠 REGISTERING ROUTE:', `"${path}"`);
+  }
+  return originalAppUse(path, ...handlers);
+};
 
 // ✅ Optional: Health check or base route
 app.get('/', (req, res) => {
@@ -30,6 +38,7 @@ mongoose.connect(process.env.MONGO_URI)
     console.error('❌ MongoDB connection error:', err);
     process.exit(1);
   });
+
 
 // ✅ Middleware
 app.use(express.json({ limit: '10mb' }));
