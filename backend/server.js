@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
@@ -47,7 +48,13 @@ app.use('/api/messages', messageRoutes);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
-  });
-}
+ const indexPath = path.join(__dirname, '../frontend/dist/index.html');
+
+app.get('*', (req, res) => {
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send('Frontend not found');
+  }
+});
+
