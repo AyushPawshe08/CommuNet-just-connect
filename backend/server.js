@@ -53,11 +53,12 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
+
 // ✅ Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
   const indexPath = path.join(__dirname, '../frontend/dist/index.html');
+
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
   app.get('*', (req, res) => {
     if (fs.existsSync(indexPath)) {
@@ -66,4 +67,4 @@ if (process.env.NODE_ENV === 'production') {
       res.status(404).send('Frontend not found');
     }
   });
-} // ✅ <- This was missing!
+} // ✅ <-- this brace must be there!
