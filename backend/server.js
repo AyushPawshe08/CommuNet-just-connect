@@ -48,13 +48,13 @@ app.use('/api/messages', messageRoutes);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
- const indexPath = path.join(__dirname, '../frontend/dist/index.html');
+  const indexPath = path.join(__dirname, '../frontend/dist/index.html');
 
-app.get('*', (req, res) => {
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
-  } else {
-    res.status(404).send('Frontend not found');
-  }
-});
-
+  app.get('*', (req, res) => {
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send('Frontend not found');
+    }
+  });
+} // ✅ <- This was missing!
